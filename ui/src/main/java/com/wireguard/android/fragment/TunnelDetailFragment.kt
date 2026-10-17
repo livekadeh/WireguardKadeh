@@ -20,6 +20,7 @@ import com.wireguard.android.backend.Tunnel
 import com.wireguard.android.databinding.TunnelDetailFragmentBinding
 import com.wireguard.android.databinding.TunnelDetailPeerBinding
 import com.wireguard.android.model.ObservableTunnel
+import com.wireguard.android.util.AccountStatusChecker
 import com.wireguard.android.util.QuantityFormatter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -33,7 +34,18 @@ class TunnelDetailFragment : BaseFragment(), MenuProvider {
     private var timerActive = true
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return false
+        return when (menuItem.itemId) {
+            R.id.menu_action_check_status -> {
+                val tunnel = selectedTunnel ?: return false
+                val context = context ?: return false
+                lifecycleScope.launch {
+                    AccountStatusChecker.checkStatus(context, tunnel)
+                }
+                true
+            }
+
+            else -> false
+        }
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

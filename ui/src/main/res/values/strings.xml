@@ -66,7 +66,7 @@
     <string name="allow_remote_control_intents_summary_on">External apps may toggle tunnels (advanced)</string>
     <string name="allow_remote_control_intents_title">Allow remote control apps</string>
     <string name="allowed_ips">Allowed IPs</string>
-    <string name="app_name" translatable="false">WireGuard</string>
+    <string name="app_name">WireguardKadeh</string>
     <string name="bad_config_context">%1$s\'s %2$s</string>
     <string name="bad_config_context_top_level">%s</string>
     <string name="bad_config_error">%1$s in %2$s</string>
@@ -260,4 +260,15 @@
     <string name="biometric_prompt_private_key_title">Authenticate to view private key</string>
     <string name="biometric_auth_error">Authentication failure</string>
     <string name="biometric_auth_error_reason">Authentication failure: %s</string>
+    <string name="check_account_status">Check account status</string>
+    <string name="checking_account_status">Checking account status…</string>
+    <string name="account_status_title">Status for %s</string>
+    <string name="account_status_no_ip">No internal IP address found in this tunnel configuration.</string>
+    <string name="account_status_expired">⚠️ Account has expired!</string>
+    <string name="account_status_expires_today">⚠️ Account expires today!</string>
+    <string name="account_status_remaining_days">✅ Account expires in %d days.</string>
+    <string name="account_status_expire_date">Expiration date: %s</string>
+    <string name="account_status_disabled_warning">Status: Disabled on server</string>
+    <string name="account_status_not_found">Account with this IP was not found on server.</string>
+    <string name="account_status_error">Error checking status: %s</string>
 </resources>

@@ -34,6 +34,7 @@ import com.wireguard.android.databinding.TunnelListFragmentBinding
 import com.wireguard.android.databinding.TunnelListItemBinding
 import com.wireguard.android.model.ObservableTunnel
 import com.wireguard.android.updater.SnackbarUpdateShower
+import com.wireguard.android.util.AccountStatusChecker
 import com.wireguard.android.util.ErrorMessages
 import com.wireguard.android.util.QrCodeFromFileScanner
 import com.wireguard.android.util.TunnelImporter
@@ -175,6 +176,12 @@ class TunnelListFragment : BaseFragment() {
         binding!!.rowConfigurationHandler = object : RowConfigurationHandler<TunnelListItemBinding, ObservableTunnel> {
             override fun onConfigureRow(binding: TunnelListItemBinding, item: ObservableTunnel, position: Int) {
                 binding.fragment = this@TunnelListFragment
+                binding.tunnelCheckStatus.setOnClickListener {
+                    val ctx = context ?: return@setOnClickListener
+                    lifecycleScope.launch {
+                        AccountStatusChecker.checkStatus(ctx, item)
+                    }
+                }
                 binding.root.setOnClickListener {
                     if (actionMode == null) {
                         selectedTunnel = item

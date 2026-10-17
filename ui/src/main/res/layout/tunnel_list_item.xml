@@ -42,15 +42,30 @@
 
         <TextView
             android:id="@+id/tunnel_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/tunnel_check_status"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{key}"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             tools:text="@sample/interface_names.json/names/names/name" />
+
+        <ImageButton
+            android:id="@+id/tunnel_check_status"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="4dp"
+            android:layout_toStartOf="@+id/tunnel_switch"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/check_account_status"
+            android:focusable="false"
+            android:src="@drawable/ic_action_account_status"
+            app:tint="?attr/colorControlNormal" />
 
         <com.wireguard.android.widget.ToggleSwitch
             android:id="@+id/tunnel_switch"
@@ -58,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:nextFocusLeft="@+id/tunnel_list_item"
+            android:nextFocusLeft="@+id/tunnel_check_status"
             app:checked="@{item.state == State.UP}"
             app:onBeforeCheckedChanged="@{fragment::setTunnelState}"
             tools:checked="@sample/interface_names.json/names/checked/checked" />
