@@ -18,6 +18,7 @@ android {
     defaultConfig {
         applicationId = pkg
         minSdk = 24
+        targetSdk = 34
         versionCode = providers.gradleProperty("wireguardVersionCode").get().toInt()
         versionName = providers.gradleProperty("wireguardVersionName").get()
         buildConfigField("int", "MIN_SDK_VERSION", minSdk.toString())
@@ -27,10 +28,21 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
         isCoreLibraryDesugaringEnabled = true
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("${rootDir}/keystore/release.jks")
+            storePassword = "wireguardkadeh"
+            keyAlias = "wireguardkadeh"
+            keyPassword = "wireguardkadeh"
+            enableV1Signing = true
+            enableV2Signing = true
+        }
+    }
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles("proguard-android-optimize.txt")
             packaging {
                 resources {
