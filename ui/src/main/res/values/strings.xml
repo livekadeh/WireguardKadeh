@@ -271,4 +271,5 @@
     <string name="account_status_disabled_warning">Status: Disabled on server</string>
     <string name="account_status_not_found">Account with this IP was not found on server.</string>
     <string name="account_status_error">Error checking status: %s</string>
+    <string name="account_status_unlimited">♾️ Account validity: Unlimited (No expiration)</string>
 </resources>

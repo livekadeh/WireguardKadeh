@@ -84,6 +84,7 @@ object AccountStatusChecker {
             return AccountStatusResult(success = false, errorMessage = msg)
         }
 
+        val hasExpiration = json.optBoolean("has_expiration", false)
         val isExpired = json.optBoolean("is_expired", false)
         val isDisabled = json.optBoolean("is_disabled", false)
         val remainingDays = if (json.has("remaining_days") && !json.isNull("remaining_days")) json.optDouble("remaining_days") else null
@@ -94,6 +95,7 @@ object AccountStatusChecker {
 
         return AccountStatusResult(
             success = true,
+            hasExpiration = hasExpiration,
             isExpired = isExpired,
             isDisabled = isDisabled,
             remainingDays = remainingDays,
@@ -119,13 +121,15 @@ object AccountStatusChecker {
 
         if (result.isExpired) {
             message.append(context.getString(R.string.account_status_expired)).append("\n")
-        } else if (result.remainingDays != null) {
+        } else if (result.hasExpiration && result.remainingDays != null) {
             val daysInt = result.remainingDays.toInt()
             if (daysInt <= 0) {
                 message.append(context.getString(R.string.account_status_expires_today)).append("\n")
             } else {
                 message.append(context.getString(R.string.account_status_remaining_days, daysInt)).append("\n")
             }
+        } else if (!result.hasExpiration) {
+            message.append(context.getString(R.string.account_status_unlimited)).append("\n")
         }
 
         if (!result.expireDate.isNullOrBlank()) {
@@ -152,6 +156,7 @@ object AccountStatusChecker {
     data class AccountStatusResult(
         val success: Boolean,
         val errorMessage: String? = null,
+        val hasExpiration: Boolean = false,
         val isExpired: Boolean = false,
         val isDisabled: Boolean = false,
         val remainingDays: Double? = null,

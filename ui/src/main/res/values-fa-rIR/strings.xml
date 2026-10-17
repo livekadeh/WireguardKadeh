@@ -270,4 +270,5 @@
     <string name="account_status_disabled_warning">وضعیت در سرور: غیرفعال</string>
     <string name="account_status_not_found">اکانتی با این آدرس IP در سرور یافت نشد.</string>
     <string name="account_status_error">خطا در دریافت وضعیت: %s</string>
+    <string name="account_status_unlimited">♾️ اعتبار اکانت: نامحدود (بدون تاریخ انقضا)</string>
 </resources>
